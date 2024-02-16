@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_16_190222) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_16_185353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
-    t.integer "number"
+    t.bigint "number"
     t.integer "cvc"
     t.integer "exp_month"
     t.integer "exp_year"
@@ -29,9 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_190222) do
 
   create_table "customers", force: :cascade do |t|
     t.text "name"
-    t.bigint "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "team_id", null: false
     t.string "email"
     t.integer "tempo_de_assinatura"
     t.integer "historico_de_presenca_nos_jogos"
@@ -45,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_190222) do
     t.string "risco_de_churn"
     t.string "feedback_sobre_servicos"
     t.string "frequencia_de_compra_de_produtos"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_customers_on_team_id"
   end
 
