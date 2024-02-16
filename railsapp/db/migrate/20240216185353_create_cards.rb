@@ -1,7 +1,7 @@
 class CreateCards < ActiveRecord::Migration[7.0]
   def change
     create_table :cards do |t|
-      t.integer :number
+      t.bigint :number
       t.integer :cvc
       t.integer :exp_month
       t.integer :exp_year
