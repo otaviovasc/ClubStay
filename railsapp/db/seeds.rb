@@ -10,7 +10,6 @@ puts "Deleting all customers"
 puts "Deleting all cards"
 
 CSV.foreach(csv_file_path, headers: true).with_index do |row, index|
-  break if index >= 6
   Customer.create(
     name: Faker::Name.name,
     email: Faker::Internet.email,
