@@ -10,9 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_16_184522) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_16_190222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
+    t.integer "number"
+    t.integer "cvc"
+    t.integer "exp_month"
+    t.integer "exp_year"
+    t.bigint "customer_id", null: false
+    t.boolean "card_status"
+    t.string "stripe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_cards_on_customer_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.text "name"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email"
+    t.integer "tempo_de_assinatura"
+    t.integer "historico_de_presenca_nos_jogos"
+    t.integer "historico_de_socio"
+    t.integer "numero_de_desistencias_no_periodo"
+    t.integer "historico_de_preco_nos_planos"
+    t.string "tipo_de_plano"
+    t.integer "quantos_membros"
+    t.string "planos_com_ingresso_incluso"
+    t.string "estado_civil"
+    t.string "risco_de_churn"
+    t.string "feedback_sobre_servicos"
+    t.string "frequencia_de_compra_de_produtos"
+    t.index ["team_id"], name: "index_customers_on_team_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_184522) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cards", "customers"
+  add_foreign_key "customers", "teams"
 end
