@@ -4,11 +4,10 @@ import stripe
 import pandas as pd
 from dotenv import load_dotenv
 
-
 load_dotenv()  # This loads the environment variables from .env
 
-pub_key = os.getenv("TEST_PUB")  # Access variables
-sec_key = os.getenv("TEST_SEC") # Access variables
+pub_key = os.getenv("PROD_PUB")  # Access variables
+sec_key = os.getenv("PROD_SEC") # Access variables
 
 # create random credit card object
 def create_card():
