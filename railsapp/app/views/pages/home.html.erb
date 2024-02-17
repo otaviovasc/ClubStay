@@ -4,6 +4,8 @@
       <p class="text-gray-700">Total Customers: <%= @customers.count %></p>
       <p class="text-gray-700">High churn chance: <%= @customers.select { |customer| customer.risco_de_churn >= 0.8 }.count %></p>
       <p class="text-gray-700">Invalid cards: <%= @cards.select { |card| !card.card_status }.count %></p>
+      <p class="text-gray-700">ROI Médio: <%= @average_roi.round(1) %></p>
+
     </div>
     <div class="w-full max-w-lg p-8">
       <div class="bg-white rounded-lg shadow-lg p-6">

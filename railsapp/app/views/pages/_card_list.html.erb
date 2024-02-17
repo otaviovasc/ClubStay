@@ -6,6 +6,8 @@
         <th class="py-2 text-center">Membro há (Mesês)</th>
         <th class="py-2 text-center">Risco de Churn</th>
         <th class="py-2 text-center">Status do Cartão</th>
+        <th class="py-2 text-center">ROI (%)</th>
+        <th class="py-2 text-center">Investimento de Retenção R$</th>
       </tr>
     </thead>
     <tbody>
@@ -29,6 +31,8 @@
               <span class="text-red-700 text-center">INVÁLIDO</span>
             <% end %>
           </td>
+          <td class="py-2 text-center"><%= card.customer.roi.round(1) %></td>
+          <td class="py-2 text-center"><%= card.customer.investment_mkt.round %></td>
         </tr>
       <% end %>
     </tbody>
