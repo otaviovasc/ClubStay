@@ -1,0 +1,36 @@
+<div class="bg-white p-4 rounded-md">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead>
+      <tr>
+        <th class="py-2">Nome</th>
+        <th class="py-2">Membro há (Mesês)</th>
+        <th class="py-2">Risco de Churn</th>
+        <th class="py-2">Status do Cartão</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cards.each.with_index do |card, index| %>
+        <tr>
+          <td class="py-2"><%= card.customer.name %></td>
+          <td class="py-2"><%= card.customer.tempo_de_assinatura %></td>
+          <td class="py-2">
+            <% if card.customer.risco_de_churn <= 0.5 %>
+              <span class="text-green-600">BAIXO</span>
+            <% elsif card.customer.risco_de_churn <= 0.80 %>
+              <span class="text-yellow-500">MÉDIO</span>
+            <% else %>
+              <span class="text-red-700">ALTO</span>
+            <% end %>
+          </td>
+          <td class="py-2">
+            <% if card.card_status %>
+              <span class="text-green-700">VÁLIDO</span>
+            <% else %>
+              <span class="text-red-700">INVÁLIDO</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
