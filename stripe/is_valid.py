@@ -154,11 +154,12 @@ def create_df(customers):
 
     data = []
     
+    
     for c in customers:
-
+        
+        
         pm_id = get_pm_id(c.id)
-        pm = stripe.PaymentMethodConfiguration.retrieve(pm_id)
-
+        pm = stripe.PaymentMethod.retrieve(pm_id)
     
         user = {
             "id": c.id,
@@ -172,8 +173,6 @@ def create_df(customers):
         data.append(user)
 
     df = pd.DataFrame(data)
-    
-    df = df.sort_values(by="status", ascending=False)
 
     return df
 
@@ -194,6 +193,7 @@ def main():
     customers = list_customers()
     
     df = create_df(customers)
+    print(df)
     
     return df
 
