@@ -2,7 +2,7 @@ require 'csv'
 require 'faker'
 
 
-csv_file_path = '../data/socio_torcedor.csv'
+csv_file_path = '../data/customers.csv'
 
 Card.destroy_all
 Customer.destroy_all
@@ -35,14 +35,17 @@ CSV.foreach(csv_file_path, headers: true).with_index do |row, index|
     investment_mkt: row['investimento_mkt']
   )
 
+  p row['aprovacao_cartao']
+
   Card.create!(
     number: cardNumber[index % 6],
     cvc: rand(100...999),
     exp_month: rand(1...12),
     exp_year: rand(2025...2040),
-    card_status: row['aprovacao_cartao'] == "TRUE" ? true : false,
+    card_status: row['aprovacao_cartao'] == 'True',
     customer_id: customer.id
   )
+
 end
 
 puts "Customers Created"
