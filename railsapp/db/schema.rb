@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_16_185353) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_17_162410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_185353) do
     t.string "frequencia_de_compra_de_produtos"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "ltv"
+    t.float "cac"
+    t.float "expected_payments"
+    t.float "roi"
+    t.float "investment_mkt"
     t.index ["team_id"], name: "index_customers_on_team_id"
   end
 

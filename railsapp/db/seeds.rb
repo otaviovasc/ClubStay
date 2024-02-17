@@ -9,8 +9,10 @@ Customer.destroy_all
 puts "Deleting all customers"
 puts "Deleting all cards"
 
+cardNumber = [4242424242424242, 4000056655699556, 5555555555554444, 2223003122003222, 5200828282828210, 5105105105105100]
 CSV.foreach(csv_file_path, headers: true).with_index do |row, index|
-  Customer.create!(
+  break if index > 600
+  customer = Customer.create!(
     name: Faker::Name.name,
     email: Faker::Internet.email,
     team_id: 1,
@@ -25,22 +27,23 @@ CSV.foreach(csv_file_path, headers: true).with_index do |row, index|
     estado_civil: row['estado_civil'],
     risco_de_churn: rand(0.0...1.0),
     feedback_sobre_servicos: row['feedback_sobre_servicos'],
-    frequencia_de_compra_de_produtos: row['frequencia_de_compra_de_produtos']
+    frequencia_de_compra_de_produtos: row['frequencia_de_compra_de_produtos'],
+    cac: row['CAC'],
+    ltv: row['LTV'],
+    expected_payments: row['expected_payments'],
+    roi: row['ROI'],
+    investment_mkt: row['investimento_mkt']
   )
-end
 
-puts "Customers Created"
-
-cardNumber = [4242424242424242, 4000056655699556, 5555555555554444, 2223003122003222, 5200828282828210, 5105105105105100]
-
-Customer.all.each.with_index do |customer, index|
   Card.create!(
     number: cardNumber[index % 6],
     cvc: rand(100...999),
     exp_month: rand(1...12),
     exp_year: rand(2025...2040),
+    card_status: row['aprovacao_cartao'] == "TRUE" ? true : false,
     customer_id: customer.id
   )
 end
 
+puts "Customers Created"
 puts "Cards created"
