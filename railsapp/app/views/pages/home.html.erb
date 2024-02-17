@@ -1,32 +1,34 @@
-<div class="mx-auto max-w-4xl my-12 space-y-6 ">
-  <div>
-    <ul role="list" class="divide-y pl-0 divide-gray-100 ">
-      <%= @customer.each do |customer| %>
-        <li class="flex gap auto-rows-[130px] py-3 hover:bg-slate-700">
-          <div class="flex pl-6 min-w-0 gap">
-            <img class="h-24 w-24  bg-fixed rounded-full bg-gray-50" src="https://imagepng.org/wp-content/uploads/2018/03/escudo-palmeiras.png" alt="">
-          </div>
-          <div class="min-w-0 flex-auto pt-3 pl-6 text-start">
-            <p class="text-lg font-semibold leading-6 text-slate-200"><%=customer.name%></p>
-            <p class="mt-1 truncate text-lg leading-5 text-slate-300">Sócio(a) há <%=customer.tempo_de_assinatura%> meses!</p>
-          </div>
-          <div class="hidden pt-2 pr-6 shrink-0 sm:flex sm:flex-col sm:items-end">
-            <p class="text-lg leading-6 text-slate-200"> Risco de Churn:
-            <%if customer.risco_de_churn.to_i <= 0.5 %>
-              <span class="text-slate-300 rounded-md p-1 bg-green-600">BAIXO</span>
-            <% elsif customer.risco_de_churn.to_i <= 0.80%>
-              <span class="text-slate-300 rounded-md p-1 bg-yellow-500">MÉDIO</span>
-            <% else %>
-              <span class="text-slate-300 rounded-md p-1 bg-red-700">ALTO</span>
-
-            <% end %>
-
-            </p>
-            <p class="mt-1 text-lg leading-5 text-slate-300">Cartão de Credito: <span class="text-slate-300 rounded-md p-1 bg-red-700">INVÁLIDO</span></p>
-          </div>
-        </li>
-        <%# <div class="h-3 px-0 overflow-hidden  bg-slate-800 outline-none"></div> %>
-      <% end %>
-    </ul>
+<div data-controller="filter" class="mx-auto max-w-4xl my-12 space-y-6">
+  <!-- Statistics Div -->
+  <div class="bg-slate-800 p-4 rounded-md">
+    <p class="text-xl font-semibold text-white">Statistics:</p>
+    <p class="text-white">Total Customers: <%= @customers.count %></p>
+    <p class="text-white">High churn chance: <%= @customers.select { |customer| customer.risco_de_churn >= 0.8 }.count %></p>
+    <p class="text-white">Invalid cards: <%= @cards.select { |card| !card.card_status }.count %></p>
   </div>
+
+  <!-- Filtering and Search Box -->
+  <div class="bg-white p-4 rounded-md space-x-4 flex items-center">
+    <label class="text-sm font-medium text-gray-700">Risco de Churn:</label>
+    <select data-filter-target="riscoDeChurn" data-action="change->filter#filter" class="border p-2" id="filterRiscoDeChurn">
+      <option value="asc">Crescente</option>
+      <option value="desc">Decrescente</option>
+    </select>
+
+
+    <label class="text-sm font-medium text-gray-700">Filtrar por Status do Cartão:</label>
+    <select data-filter-target="cardStatus" data-action="change->filter#filter" class="border p-2" id="filterCardStatus">
+      <option value="">All</option>
+      <option value="valid">Valid</option>
+      <option value="invalid">Invalid</option>
+    </select>
+
+    <label class="text-sm font-medium text-gray-700">Procurar por Name:</label>
+    <input data-filter-target="name" data-action="input->filter#filter" type="text" class="border p-2" placeholder="Enter Name" id="searchByName">
+  </div>
+<!-- Card List Table -->
+  <div data-filter-target="list">
+    <%= render "card_list" %>
+  </div>
+
 </div>
