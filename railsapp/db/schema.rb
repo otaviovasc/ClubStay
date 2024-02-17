@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_16_185353) do
     t.integer "quantos_membros"
     t.string "planos_com_ingresso_incluso"
     t.string "estado_civil"
-    t.string "risco_de_churn"
+    t.float "risco_de_churn"
     t.string "feedback_sobre_servicos"
     t.string "frequencia_de_compra_de_produtos"
     t.datetime "created_at", null: false
