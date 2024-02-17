@@ -1,1 +1,32 @@
 // Specific CSS for your home-page
+.loading-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.loading-bar {
+  height: 30px;
+  background-color: #4caf50;
+  width: 0%;
+  border-radius: 25px;
+  transition: width 2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+.start-loading-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.start-loading-button:hover {
+  background-color: #45a049;
+}
