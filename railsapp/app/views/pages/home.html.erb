@@ -1,14 +1,44 @@
+  <div class=" mx-auto max-w-4xl my-12 space-y-6 rounded flex justify-between items-center ">
+    <div class="text-center bg-white rounded-lg shadow-lg p-6 ml-8">
+      <p class="text-xl font-semibold text-gray-700">Statistics:</p>
+      <p class="text-gray-700">Total Customers: <%= @customers.count %></p>
+      <p class="text-gray-700">High churn chance: <%= @customers.select { |customer| customer.risco_de_churn >= 0.8 }.count %></p>
+      <p class="text-gray-700">Invalid cards: <%= @cards.select { |card| !card.card_status }.count %></p>
+    </div>
+    <div class="w-full max-w-lg p-8">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-lg font-medium mb-6">Payment Information</h2>
+        <form>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
+                    <input type="text" name="card-number" id="card-number" placeholder="0000 0000 0000 0000" class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="expiration-date" class="block text-sm font-medium text-gray-700 mb-2">Expiration Date</label>
+                    <input type="text" name="expiration-date" id="expiration-date" placeholder="MM / YY" class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="cvv" class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                    <input type="text" name="cvv" id="cvv" placeholder="000" class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+                <div class="col-span-2 sm:col-span-1">
+                    <label for="card-holder" class="block text-sm font-medium text-gray-700 mb-2">Card Holder</label>
+                    <input type="text" name="card-holder" id="card-holder" placeholder="Full Name" class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+                </div>
+            </div>
+            <div class="mt-8">
+                <button type="submit" class="w-full bg-green-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg focus:outline-none">Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 <div data-controller="filter" class="mx-auto max-w-4xl my-12 space-y-6">
   <!-- Statistics Div -->
-  <div class="bg-slate-800 p-4 rounded-md">
-    <p class="text-xl font-semibold text-white">Statistics:</p>
-    <p class="text-white">Total Customers: <%= @customers.count %></p>
-    <p class="text-white">High churn chance: <%= @customers.select { |customer| customer.risco_de_churn >= 0.8 }.count %></p>
-    <p class="text-white">Invalid cards: <%= @cards.select { |card| !card.card_status }.count %></p>
-  </div>
 
   <!-- Filtering and Search Box -->
-  <div class="bg-white p-4 rounded-md space-x-4 flex items-center">
+  <div class="bg-white p-4 rounded-md space-x-4 flex items-center justify-between">
     <label class="text-sm font-medium text-gray-700">Risco de Churn:</label>
     <select data-filter-target="riscoDeChurn" data-action="change->filter#filter" class="border p-2" id="filterRiscoDeChurn">
       <option value="asc">Crescente</option>
@@ -22,9 +52,6 @@
       <option value="valid">Valid</option>
       <option value="invalid">Invalid</option>
     </select>
-
-    <label class="text-sm font-medium text-gray-700">Procurar por Name:</label>
-    <input data-filter-target="name" data-action="input->filter#filter" type="text" class="border p-2" placeholder="Enter Name" id="searchByName">
   </div>
 <!-- Card List Table -->
   <div data-filter-target="list">
