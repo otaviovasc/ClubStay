@@ -23,7 +23,7 @@ CSV.foreach(csv_file_path, headers: true).with_index do |row, index|
     quantos_membros: row['quantos_membros'],
     planos_com_ingresso_incluso: row['planos_com_ingresso_incluso'] == 'sim',
     estado_civil: row['estado_civil'],
-    # risco_de_churn: row['risco_de_churn'],
+    risco_de_churn: rand(0.0...1.0),
     feedback_sobre_servicos: row['feedback_sobre_servicos'],
     frequencia_de_compra_de_produtos: row['frequencia_de_compra_de_produtos']
   )
@@ -31,16 +31,16 @@ end
 
 puts "Customers Created"
 
-# cardNumber = [4242424242424242, 4000056655699556, 5555555555554444, 2223003122003222, 5200828282828210, 5105105105105100]
+cardNumber = [4242424242424242, 4000056655699556, 5555555555554444, 2223003122003222, 5200828282828210, 5105105105105100]
 
-# Customer.all.each.with_index do |customer, index|
-#   Card.create!(
-#     number: cardNumber[index % 6],
-#     cvc: rand(100...999),
-#     exp_month: rand(1...12),
-#     exp_year: rand(2025...2040),
-#     customer_id: customer.id
-#   )
-# end
+Customer.all.each.with_index do |customer, index|
+  Card.create!(
+    number: cardNumber[index % 6],
+    cvc: rand(100...999),
+    exp_month: rand(1...12),
+    exp_year: rand(2025...2040),
+    customer_id: customer.id
+  )
+end
 
-# puts "Cards created"
+puts "Cards created"
