@@ -14,7 +14,7 @@ class Customer < ApplicationRecord
   # validates :quantos_membros, presence: true, numericality: { only_integer: true }
   # validates :planos_com_ingresso_incluso, inclusion: { in: [true, false] }
   # validates :estado_civil, presence: true
-  # validates :risco_de_churn, presence: true
+  # validates :risco_de_churn, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 1 }
   # validates :feedback_sobre_servicos, presence: true, numericality: { only_integer: true }
   # validates :frequencia_de_compra_de_produtos, presence: true, numericality: { only_integer: true }
 end
