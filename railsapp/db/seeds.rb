@@ -35,8 +35,6 @@ CSV.foreach(csv_file_path, headers: true).with_index do |row, index|
     investment_mkt: row['investimento_mkt']
   )
 
-  p row['aprovacao_cartao']
-
   Card.create!(
     number: cardNumber[index % 6],
     cvc: rand(100...999),
